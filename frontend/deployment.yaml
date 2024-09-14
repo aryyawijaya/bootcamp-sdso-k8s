@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nginx:lates
+        image: nginx:latest
         resources:
           limits:
             memory: "128Mi"

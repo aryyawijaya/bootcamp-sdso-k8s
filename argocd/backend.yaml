@@ -4,18 +4,15 @@ metadata:
   name: backend
 spec:
   destination:
-    name: ''
     namespace: bootcamp-sdso
     server: https://kubernetes.default.svc
   source:
     path: backend
     repoURL: https://github.com/aryyawijaya/bootcamp-sdso-k8s.git
     targetRevision: main
-  sources: []
   project: default
   syncPolicy:
     automated:
       prune: true
-      selfHeal: false
     syncOptions:
       - CreateNamespace=true
