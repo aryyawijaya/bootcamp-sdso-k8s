@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test-pod
+  name: frontend
   labels:
-    name: test-pod
+    name: frontend
 spec:
   containers:
-  - name: test-pod
-    image: nginx
+  - name: frontend
+    image: nginx:lates
     resources:
       limits:
         memory: "128Mi"
