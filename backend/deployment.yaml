@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: aryyadocker/bootcamp-sdso-backend:65f84a817df20d372b20d999a2b8a48a9f3e6866
+          image: aryyadocker/bootcamp-sdso-backend
           envFrom:
             - configMapRef:
                 name: backend-config
