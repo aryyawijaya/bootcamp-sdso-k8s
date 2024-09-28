@@ -26,16 +26,15 @@ spec:
             requests:
               memory: "10Mi"
               cpu: "10m"
-          restartPolicy: Always
           livenessProbe:
             httpGet:
-              path: /healthz
+              path: /
               port: 80
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /readiness
+              path: /
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 5

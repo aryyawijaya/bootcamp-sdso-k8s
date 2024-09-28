@@ -17,6 +17,9 @@ spec:
       containers:
         - name: backend
           image: aryyadocker/bootcamp-sdso-backend:65f84a817df20d372b20d999a2b8a48a9f3e6866
+          envFrom:
+            - configMapRef:
+                name: backend-config
           resources:
             limits:
               memory: "512Mi"
@@ -24,16 +27,15 @@ spec:
             requests:
               memory: "10Mi"
               cpu: "10m"
-          restartPolicy: Always
           livenessProbe:
             httpGet:
-              path: /healthz
-              port: 8080
+              path: /ping
+              port: 8001
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /readiness
-              port: 8080
+              path: /ping
+              port: 8001
             initialDelaySeconds: 10
             periodSeconds: 5
