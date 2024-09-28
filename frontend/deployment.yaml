@@ -1,9 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-deployment
+  labels:
+    app: frontend
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -13,14 +15,27 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: nginx:1.26
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-          requests:
-            memory: "10Mi"
-            cpu: "10m"
-        ports:
-        - containerPort: 80
+        - name: frontend
+          image: aryyadocker/bootcamp-sdso-frontend:e4efdc2ecebecf5e090455747d5dd0cfa1d56f4f
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "10Mi"
+              cpu: "10m"
+          restartPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5

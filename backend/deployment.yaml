@@ -1,9 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
+  labels:
+    app: backend
 spec:
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -13,14 +15,25 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: nginx:1.26
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-          requests:
-            memory: "10Mi"
-            cpu: "10m"
-        ports:
-        - containerPort: 80
+        - name: backend
+          image: aryyadocker/bootcamp-sdso-backend:65f84a817df20d372b20d999a2b8a48a9f3e6866
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "10Mi"
+              cpu: "10m"
+          restartPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
