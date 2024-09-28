@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: aryyadocker/bootcamp-sdso-frontend:e4efdc2ecebecf5e090455747d5dd0cfa1d56f4f
+          image: aryyadocker/bootcamp-sdso-frontend
           ports:
             - containerPort: 80
           resources:
