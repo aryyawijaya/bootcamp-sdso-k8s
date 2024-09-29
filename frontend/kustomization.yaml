@@ -1,8 +1,8 @@
 configurations:
-  - image-transformer.yaml
+- image-transformer.yaml
 images:
-  - name: aryyadocker/bootcamp-sdso-frontend
-    newTag: e4efdc2ecebecf5e090455747d5dd0cfa1d56f4f
+- name: aryyadocker/bootcamp-sdso-frontend
+  newTag: bbe8d43d444914bf55fa93fcd2131132b22cdc86
 resources:
-  - deployment.yaml
-  - service.yaml
+- deployment.yaml
+- service.yaml
