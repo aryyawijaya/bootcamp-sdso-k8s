@@ -14,6 +14,7 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: bootcamp-sdso-ksa
       containers:
         - name: backend
           image: aryyadocker/bootcamp-sdso-backend
@@ -39,3 +40,18 @@ spec:
               port: 8001
             initialDelaySeconds: 10
             periodSeconds: 5
+          stdin: true
+          stdinOnce: true
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          tty: true
+          volumeMounts:
+            - mountPath: "/var/secrets"
+              name: mysecret
+      volumes:
+      - name: mysecret
+        csi:
+          driver: secrets-store-gke.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: bootcamp-sdso-secret-provider
