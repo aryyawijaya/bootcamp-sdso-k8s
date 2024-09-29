@@ -14,6 +14,8 @@ spec:
       labels:
         app: backend
     spec:
+      nodeSelector:
+        iam.gke.io/gke-metadata-server-enabled: "true"
       serviceAccountName: bootcamp-sdso-ksa
       containers:
         - name: backend
