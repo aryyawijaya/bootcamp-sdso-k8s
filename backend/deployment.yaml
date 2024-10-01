@@ -14,12 +14,35 @@ spec:
       labels:
         app: backend
     spec:
+      serviceAccountName: ksa-cloud-sql
       containers:
         - name: backend
           image: aryyadocker/bootcamp-sdso-backend
           envFrom:
             - configMapRef:
                 name: backend-config
+          env:
+          - name: PORT
+            value: "8080"
+          - name: POSTGRES_HOST
+            value: "127.0.0.1"
+          - name: POSTGRES_PORT
+            value: "5432"
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: gke-cloud-sql-secrets
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: gke-cloud-sql-secrets
+                key: password
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: gke-cloud-sql-secrets
+                key: database
           resources:
             limits:
               memory: "512Mi"
