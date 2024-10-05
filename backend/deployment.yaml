@@ -47,6 +47,11 @@ spec:
               secretKeyRef:
                 name: gke-cloud-sql-secrets
                 key: database
+          - name: POSTGRES_PORT
+            valueFrom:
+              secretKeyRef:
+                name: gke-cloud-sql-secrets
+                key: port
           resources:
             limits:
               memory: "512Mi"
